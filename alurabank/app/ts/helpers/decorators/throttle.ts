@@ -1,0 +1,20 @@
+export function throttle(milissegundos: number = 500) {
+
+    return function(target: any, propertyKey: string, descriptor: PropertyDescriptor ) {
+
+        const metodoOriginal = descriptor.value;
+        let timer = 0;
+
+                                    // pode trazer todos ou nenhum parametro da funcao
+        descriptor.value = function(...args: any[]) {
+
+            if(event) event.preventDefault();
+            clearInterval(timer);
+            timer = setTimeout(() => metodoOriginal.apply(this, args) , milissegundos);
+            
+        }
+
+        return descriptor;
+    }
+
+}
